@@ -222,6 +222,11 @@ namespace MetroFramework
             get { return DefaultLight(24f); }
         }
 
+        public static Font Company
+        {
+            get { return DefaultBold(14f); }
+        }
+
         public static Font Subtitle
         {
             get { return Default(14f); }

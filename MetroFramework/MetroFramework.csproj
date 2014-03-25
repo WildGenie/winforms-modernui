@@ -73,6 +73,7 @@
     <Compile Include="Animation\DelayedCall.cs" />
     <Compile Include="Animation\ExpandAnimation.cs" />
     <Compile Include="Animation\MoveAnimation.cs" />
+    <Compile Include="Animation\Swdev\AnimationUtil.cs" />
     <Compile Include="Animation\TransitionType.cs" />
     <Compile Include="Components\MetroStyleExtender.cs">
       <SubType>Component</SubType>
@@ -214,6 +215,12 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SwdevIUI\ScreenBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SwdevIUI\ScreenBase.Designer.cs">
+      <DependentUpon>ScreenBase.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

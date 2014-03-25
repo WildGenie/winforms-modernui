@@ -36,6 +36,9 @@ using MetroFramework.Components;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
 using MetroFramework.Native;
+using System.Collections;
+using MetroFramework.SwdevIUI;
+using MetroFramework.Animation.Swdev;
 
 namespace MetroFramework.Forms
 {
@@ -75,6 +78,78 @@ namespace MetroFramework.Forms
 
     public class MetroForm : Form, IMetroForm, IDisposable
     {
+
+        #region Swdev
+
+        Panel mainPanel = new Panel();
+        Hashtable hashScreen = new Hashtable();
+        ScreenBase activeScreen = null;
+        ScreenBase loadingScreen = null;
+        ScreenBase homeScreen = null;
+
+        public void addScreen(string name, ScreenBase screen)
+        {
+            if (screen.ScreenType == ScreenTypeEnum.LoadingScreen)
+            {
+                loadingScreen = screen;
+            }
+            else if (screen.ScreenType == ScreenTypeEnum.HomeScreen)
+            {
+                homeScreen = screen;
+            }
+
+            screen.BackColor = MetroColors.White;
+            screen.Finished += screen_Finished;
+            hashScreen.Add(name, screen);
+        }
+
+        void screen_Finished(object sender, ScreenBase.ScreenEventArgs e)
+        {
+            if(e.Screen.ScreenType==ScreenTypeEnum.LoadingScreen)
+            {
+                e.Screen.Dismiss();
+                this.mainPanel.Controls.Remove(e.Screen);
+                displayScreen(homeScreen);
+            }
+
+        }
+
+
+
+
+        public void startMetroUI()
+        {
+            if (loadingScreen != null)
+            {
+                displayScreen(loadingScreen);
+            }
+        }
+
+        private void displayScreen(ScreenBase screen)
+        {
+            if (screen==null)
+            {
+                throw new Exception();
+            }
+            screen.Dock = DockStyle.Fill;
+            screen.Visible = false;
+            this.mainPanel.Controls.Add(screen);
+            AnimationUtil.Animate(screen, AnimationUtil.Effect.Slide, 500, 270);
+            
+            screen.ActivateScreen();
+            activeScreen = screen;
+        }
+
+        private bool displayHeaderBackground = true;
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        [DefaultValue(true)]
+        public bool DisplayHeaderBackground
+        {
+            get { return displayHeaderBackground; }
+            set { displayHeaderBackground = value; }
+        }
+
+        #endregion
         #region Interface
 
         private MetroColorStyle metroStyle = MetroColorStyle.Blue;
@@ -165,6 +240,7 @@ namespace MetroFramework.Forms
         {
             get { return new Padding(20, DisplayHeader ? 60 : 20, 20, 20); }
         }
+        
 
         private bool displayHeader = true;
         [Category(MetroDefaults.PropertyCategory.Appearance)]
@@ -177,7 +253,7 @@ namespace MetroFramework.Forms
                 if (value != displayHeader)
                 {
                     Padding p = base.Padding;
-                    p.Top += value ? 30 : -30;
+                    p.Top += value ? 30 : -30;                    
                     base.Padding = p;
                 }
                 displayHeader = value;
@@ -246,7 +322,7 @@ namespace MetroFramework.Forms
         {
             get { return backImagePadding; }
             set
-            {
+            {                
                 backImagePadding = value;
                 Refresh();
             }
@@ -259,7 +335,7 @@ namespace MetroFramework.Forms
             get { return backMaxSize; }
             set
             {
-                backMaxSize = value;
+                backMaxSize = value ;
                 Refresh();
             }
         }
@@ -304,6 +380,11 @@ namespace MetroFramework.Forms
             Name = "MetroForm";
             StartPosition = FormStartPosition.CenterScreen;
             TransparencyKey = Color.Lavender;
+
+            #region Swdev
+            mainPanel.Dock = DockStyle.Fill;
+            Controls.Add(mainPanel);
+            #endregion
         }
 
         protected override void Dispose(bool disposing)
@@ -375,6 +456,20 @@ namespace MetroFramework.Forms
                 }
             }
 
+            if (displayHeaderBackground)
+            {
+                using (SolidBrush b = new SolidBrush(MetroColors.Brown))
+                {
+                    e.Graphics.FillRectangles(b, new Rectangle[] { 
+                        new Rectangle(0, 0, ClientRectangle.Width, 60)
+                    });
+                }
+
+                Rectangle bounds = new Rectangle(20, 10, ClientRectangle.Width - 2 * 20, 40);
+                TextFormatFlags flags = TextFormatFlags.EndEllipsis | GetTextFormatFlags();
+                TextRenderer.DrawText(e.Graphics, "Cattlesoft, Inc", MetroFonts.Company, bounds, MetroColors.White, flags);
+            }
+
             if (backImage != null && backMaxSize != 0)
             {
                 Image img = MetroImage.ResizeImage(backImage, new Rectangle(0, 0, backMaxSize, backMaxSize));
@@ -402,10 +497,10 @@ namespace MetroFramework.Forms
             }
 
             if (displayHeader)
-            {
-                Rectangle bounds = new Rectangle(20, 20, ClientRectangle.Width - 2 * 20, 40);
+            {   
+                Rectangle bounds = new Rectangle(20, 25, ClientRectangle.Width - 2 * 20, 40);
                 TextFormatFlags flags = TextFormatFlags.EndEllipsis | GetTextFormatFlags();
-                TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Title, bounds, foreColor, flags);
+                TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Title, bounds, MetroColors.White /*foreColor*/, flags);
             }
 
             if (Resizable && (SizeGripStyle == SizeGripStyle.Auto || SizeGripStyle == SizeGripStyle.Show))
@@ -423,6 +518,8 @@ namespace MetroFramework.Forms
                     });
                 }
             }
+
+            
         }
 
         private TextFormatFlags GetTextFormatFlags()
@@ -700,6 +797,9 @@ namespace MetroFramework.Forms
                     newButton.Text = "2";
             }
 
+
+            newButton.BackColor = MetroColors.Brown;
+            newButton.UseCustomBackColor = true;
             newButton.Style = Style;
             newButton.Theme = Theme;
             newButton.Tag = button;

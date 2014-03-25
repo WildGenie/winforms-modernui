@@ -249,7 +249,11 @@ namespace MetroFramework.Controls
                     if (!useCustomBackColor)
                     {
                         backColor = MetroPaint.BackColor.Button.Normal(Theme);
-                    } 
+                    }
+                    else
+                    {
+                        backColor = this.BackColor;
+                    }
                 }
 
                 if (backColor.A == 255 && BackgroundImage == null)

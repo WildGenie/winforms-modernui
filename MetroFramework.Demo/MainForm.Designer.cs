@@ -1084,7 +1084,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackImage = global::MetroFramework.Demo.Properties.Resources.GitHub_Mark;
             this.BackImagePadding = new System.Windows.Forms.Padding(210, 10, 0, 0);
-            this.BackMaxSize = 50;
+            this.BackMaxSize = 80;
             this.ClientSize = new System.Drawing.Size(617, 372);
             this.Controls.Add(this.metroTabControl1);
             this.Name = "MainForm";
