@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Animation.Swdev;
+using MetroFramework.Forms;
 
 namespace MetroFramework.SwdevIUI
 {
-    public enum ScreenTypeEnum { LoadingScreen, HomeScreen };
+    public enum ScreenTypeEnum { LoadingScreen, HomeScreen, Others };
     public partial class ScreenBase : UserControl
     {
-        
+        public MetroForm MetroFormContainer;
         public ScreenTypeEnum ScreenType;
 
         public class ScreenEventArgs : EventArgs

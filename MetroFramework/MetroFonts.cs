@@ -224,7 +224,12 @@ namespace MetroFramework
 
         public static Font Company
         {
-            get { return DefaultBold(14f); }
+            get { return DefaultBold(15f); }
+        }
+
+        public static Font ScreenName
+        {
+            get { return Default(28f); }
         }
 
         public static Font Subtitle
