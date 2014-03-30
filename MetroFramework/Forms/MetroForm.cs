@@ -39,6 +39,7 @@ using MetroFramework.Native;
 using System.Collections;
 using MetroFramework.SwdevIUI;
 using MetroFramework.Animation.Swdev;
+using MetroFramework.Controls;
 
 namespace MetroFramework.Forms
 {
@@ -83,7 +84,7 @@ namespace MetroFramework.Forms
         Panel mainPanel = new Panel();
         Button topNavigationButton;
         Label lblScreenName;
-        TextBox txtLiveSearch;
+        MetroTextBox txtLiveSearch;
         Hashtable hashScreen = new Hashtable();
         ScreenBase activeScreen = null;        
         ScreenBase loadingScreen = null;
@@ -152,7 +153,8 @@ namespace MetroFramework.Forms
             if (isAdvancing) //not adding homescreen as bottomest screen
             {
                 topNavigationButton.Visible = false;
-                topNavigationButton.Text = ""; //left arrow
+                //topNavigationButton.Text = ""; //left arrow
+                topNavigationButton.Image = MetroFramework.Properties.Resources.back;
                 AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 100, 90);
 
                 stackScreen.Push(activeScreen); 
@@ -1049,7 +1051,7 @@ namespace MetroFramework.Forms
             Refresh();
 
             #region swdev
-                this.txtLiveSearch = new TextBox();
+                this.txtLiveSearch = new MetroTextBox();
                 this.txtLiveSearch.Size = new System.Drawing.Size(146, 20);
                 MetroFormButton btnMinimize;
                 windowButtonList.TryGetValue(WindowButtons.Minimize, out btnMinimize);
