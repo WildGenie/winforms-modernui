@@ -1,4 +1,4 @@
-/**
+﻿/**
  * MetroFramework - Modern UI for WinForms
  * 
  * The MIT License (MIT)
@@ -125,6 +125,7 @@ namespace MetroFramework.Forms
             {
                 DisplayScreen(loadingScreen,false);
             }
+            topNavigationButton.Visible = false;
         }
 
         public void DisplayScreen(string screenName, bool isAdvancing)
@@ -149,25 +150,35 @@ namespace MetroFramework.Forms
 
             if (isAdvancing) //not adding homescreen as bottomest screen
             {
+                topNavigationButton.Visible = false;
+                topNavigationButton.Text = ""; //left arrow
+                AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 100, 90);
+
                 stackScreen.Push(activeScreen); 
                 AnimationUtil.Animate(activeScreen, AnimationUtil.Effect.Slide, 100, 180);
                 
-                topNavigationButton.Visible = false;
-                topNavigationButton.Image = MetroFramework.Properties.Resources.Back;
-                AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 100, 90);
+                
             }
             else
-            {
+            {   
+                AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 50, 90);
+                topNavigationButton.Visible = false;
+                //topNavigationButton.Text = "";// ""; //home
                 if (activeScreen != null && activeScreen.ScreenType!=ScreenTypeEnum.LoadingScreen)
                     AnimationUtil.Animate(activeScreen, AnimationUtil.Effect.Slide, 100, 180);
-                topNavigationButton.Visible = false;
-                topNavigationButton.Image = MetroFramework.Properties.Resources.Home;
-                AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 100, 90);
+                
             }
 
             lblScreenName.Visible = false;
-            lblScreenName.Text = screen.Name;
-            AnimationUtil.Animate(lblScreenName, AnimationUtil.Effect.Slide, 100, 0);
+            if (screen.ScreenType == ScreenTypeEnum.Others)
+            {
+                lblScreenName.Text = screen.Name;
+            }
+            else
+            {
+                lblScreenName.Text = "  ";
+            }
+            AnimationUtil.Animate(lblScreenName, AnimationUtil.Effect.Slide, 100, 90);
 
             
 
@@ -187,7 +198,7 @@ namespace MetroFramework.Forms
         public bool DisplayHeaderBackground
         {
             get { return displayHeaderBackground; }
-            set { displayHeaderBackground = value; }
+            set { displayHeaderBackground = value; this.Refresh(); }
         }
 
         #endregion
@@ -301,6 +312,20 @@ namespace MetroFramework.Forms
                 displayHeader = value;
             }
         }
+
+        #region swdev
+        private MetroFormTextAlign headerAlignment = MetroFormTextAlign.Left;
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        [DefaultValue(true)]
+        public MetroFormTextAlign HeaderAlignment
+        {
+            get { return headerAlignment; }
+            set
+            {
+                headerAlignment = value;
+            }
+        }
+        #endregion
 
         private bool isResizable = true;
         [Category(MetroDefaults.PropertyCategory.Appearance)]
@@ -428,27 +453,48 @@ namespace MetroFramework.Forms
             Controls.Add(mainPanel);
 
             topNavigationButton = new Button();
-            topNavigationButton.BackColor = MetroColors.Brown;//MetroPaint.GetStyleColor(this.Style);
-            topNavigationButton.Image = MetroFramework.Properties.Resources.Home;
+            topNavigationButton.Visible = false;
+            topNavigationButton.Font = new System.Drawing.Font("Segoe UI Symbol", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            topNavigationButton.ForeColor = MetroColors.Silver;
+            topNavigationButton.BackColor = MetroColors.White;//MetroPaint.GetStyleColor(this.Style); //brown
+            topNavigationButton.Text = "";//""; //HOME
             topNavigationButton.FlatStyle = FlatStyle.Flat;
             topNavigationButton.FlatAppearance.BorderSize = 0;
+            topNavigationButton.FlatAppearance.MouseOverBackColor = topNavigationButton.BackColor;
+            topNavigationButton.FlatAppearance.MouseDownBackColor = topNavigationButton.BackColor;
+            topNavigationButton.MouseHover += topNavigationButton_MouseHover;
+            topNavigationButton.MouseLeave += topNavigationButton_MouseLeave;
             topNavigationButton.AutoSize = true;
             topNavigationButton.Click += topNavigationButton_Click;
+            topNavigationButton.Location = new Point(backImagePadding.Left + 180, 5);//new Point(Padding., Padding.Left);
             Controls.Add(topNavigationButton);
+            
 
             lblScreenName = new Label();
             this.lblScreenName.AutoSize = true;
-            this.lblScreenName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(81)))), ((int)(((byte)(0)))));
+            this.lblScreenName.BackColor = MetroColors.White; //System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(81)))), ((int)(((byte)(0)))));
             this.lblScreenName.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScreenName.ForeColor = System.Drawing.Color.White;
-            this.lblScreenName.Location = new System.Drawing.Point(81, 10);
+            this.lblScreenName.ForeColor = MetroColors.Black; //System.Drawing.Color.White;
             this.lblScreenName.Name = "lblScreenName";
             this.lblScreenName.Size = new System.Drawing.Size(122, 37);
             this.lblScreenName.TabIndex = 2;
+            this.lblScreenName.Location = new Point(topNavigationButton.Left + topNavigationButton.Width - 1, topNavigationButton.Top+10);
             this.lblScreenName.Text = "Metro UI";
             Controls.Add(lblScreenName);
             #endregion
         }
+
+        #region swdev
+        void topNavigationButton_MouseLeave(object sender, EventArgs e)
+        {
+            topNavigationButton.ForeColor = MetroColors.Silver;
+        }
+
+        void topNavigationButton_MouseHover(object sender, EventArgs e)
+        {
+            topNavigationButton.ForeColor = MetroColors.Black;
+        }
+        #endregion swdev
 
         #region swdev
         void topNavigationButton_Click(object sender, EventArgs e)
@@ -572,14 +618,30 @@ namespace MetroFramework.Forms
             if (displayHeader)
             {   
 
-                Rectangle bounds = new Rectangle(ClientRectangle.Right - (backImagePadding.Right), 25, ClientRectangle.Width - 2 * 20, 40);
-                TextFormatFlags flags = TextFormatFlags.EndEllipsis | GetTextFormatFlags();
-                TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Title, bounds, MetroColors.White /*foreColor*/, flags);
+                Rectangle bounds = new Rectangle(0,0,0,0);
 
                 #region swdev
-                bounds = new Rectangle(ClientRectangle.Right - (backImagePadding.Right ) + 3, 10, ClientRectangle.Width - 2 * 20, 40);//20 //80
+                if (headerAlignment == MetroFormTextAlign.Right)
+                {
+                    bounds = new Rectangle(ClientRectangle.Right - (backImagePadding.Right), 25, ClientRectangle.Width - 2 * 20, 40);
+                }else if (headerAlignment == MetroFormTextAlign.Left)
+                {
+                    bounds = new Rectangle(backImagePadding.Left + backImage.Size.Width + 10, 25, ClientRectangle.Width - 2 * 20, 40);
+                }
+                #endregion
+                TextFormatFlags flags = TextFormatFlags.EndEllipsis | GetTextFormatFlags();
+                TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Title, bounds, MetroPaint.ForeColor.Title(Theme), flags);
+
+                #region swdev
+                if (headerAlignment == MetroFormTextAlign.Right)
+                {
+                    bounds = new Rectangle(ClientRectangle.Right - (backImagePadding.Right) + 3, 10, ClientRectangle.Width - 2 * 20, 40);//20 //80
+                }else if (headerAlignment == MetroFormTextAlign.Left)
+                {
+                    bounds = new Rectangle(backImagePadding.Left + backImage.Size.Width + 10 , 10, ClientRectangle.Width - 2 * 20, 40);//20 //80
+                }
                 flags = TextFormatFlags.EndEllipsis | GetTextFormatFlags();
-                TextRenderer.DrawText(e.Graphics, "Cattlesoft, Inc", MetroFonts.Company, bounds, MetroColors.White, flags);
+                TextRenderer.DrawText(e.Graphics, "Cattlesoft, Inc", MetroFonts.Company, bounds, MetroPaint.ForeColor.Title(Theme), flags);
 
                 /*bounds = new Rectangle(80, 10, ClientRectangle.Width - 2 * 20, 40);//20 //80
                 flags = TextFormatFlags.EndEllipsis | GetTextFormatFlags();
