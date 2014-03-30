@@ -492,11 +492,11 @@ namespace MetroFramework.Forms
 
         void txtLiveSearch_Leave(object sender, EventArgs e)
         {
-            //if (txtLiveSearch.Text.Trim().Length == 0)
-            //{
+            if (txtLiveSearch.Text.Trim().Length == 0)
+            {
                 txtLiveSearch.Text = "Search";
                 txtLiveSearch.ForeColor = MetroColors.Silver;
-            //}
+            }
         }
 
         #region swdev
