@@ -83,6 +83,7 @@ namespace MetroFramework.Forms
         Panel mainPanel = new Panel();
         Button topNavigationButton;
         Label lblScreenName;
+        TextBox txtLiveSearch;
         Hashtable hashScreen = new Hashtable();
         ScreenBase activeScreen = null;        
         ScreenBase loadingScreen = null;
@@ -482,6 +483,20 @@ namespace MetroFramework.Forms
             this.lblScreenName.Text = "Metro UI";
             Controls.Add(lblScreenName);
             #endregion
+        }
+
+        void txtLiveSearch_Enter(object sender, EventArgs e)
+        {
+            txtLiveSearch.Text = string.Empty;
+        }
+
+        void txtLiveSearch_Leave(object sender, EventArgs e)
+        {
+            //if (txtLiveSearch.Text.Trim().Length == 0)
+            //{
+                txtLiveSearch.Text = "Search";
+                txtLiveSearch.ForeColor = MetroColors.Silver;
+            //}
         }
 
         #region swdev
@@ -958,6 +973,9 @@ namespace MetroFramework.Forms
             Controls.Add(newButton);
 
             windowButtonList.Add(button, newButton);
+
+            
+
         }
 
         private void WindowButton_Click(object sender, EventArgs e)
@@ -1029,6 +1047,26 @@ namespace MetroFramework.Forms
             }
 
             Refresh();
+
+            #region swdev
+                this.txtLiveSearch = new TextBox();
+                this.txtLiveSearch.Size = new System.Drawing.Size(146, 20);
+                MetroFormButton btnMinimize;
+                windowButtonList.TryGetValue(WindowButtons.Minimize, out btnMinimize);
+                if (btnMinimize != null)
+                {
+                    this.txtLiveSearch.Location = new System.Drawing.Point(btnMinimize.Left - txtLiveSearch.Width - 5, 12);
+                    this.txtLiveSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+                    this.txtLiveSearch.Name = "txtLiveSearch";
+                    this.txtLiveSearch.TabIndex = 38;
+                    this.txtLiveSearch.Text = "Search";
+                    this.txtLiveSearch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    this.txtLiveSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+                    this.txtLiveSearch.Leave += txtLiveSearch_Leave;
+                    this.txtLiveSearch.Enter += txtLiveSearch_Enter;
+                    Controls.Add(txtLiveSearch);
+                }
+            #endregion
         }
 
         private class MetroFormButton : Button, IMetroControl
