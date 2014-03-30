@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Animation.Swdev;
 using MetroFramework.Forms;
+using System.Collections;
 
 namespace MetroFramework.SwdevIUI
 {
@@ -17,6 +18,16 @@ namespace MetroFramework.SwdevIUI
     {
         public MetroForm MetroFormContainer;
         public ScreenTypeEnum ScreenType;
+        
+        private bool isHavingCommandScreen;
+        public bool IsHavingCommandScreen
+        {
+            get { return isHavingCommandScreen;  }
+            set 
+            { 
+                isHavingCommandScreen = value; 
+            }
+        }
 
         public class ScreenEventArgs : EventArgs
         {
@@ -46,7 +57,6 @@ namespace MetroFramework.SwdevIUI
         public ScreenBase()
         {
             InitializeComponent();
-            
         }
 
         public virtual void ActivateScreen()
@@ -57,6 +67,18 @@ namespace MetroFramework.SwdevIUI
         internal void Dismiss()
         {
             //AnimationUtil.Animate(this, AnimationUtil.Effect.Center, 1000, 0);
+        }
+
+        public void DisplayCommandBar()
+        {
+            MetroFormContainer.DisplayCommandBar(hashCommandBarItem);   
+        }
+
+        
+        Hashtable hashCommandBarItem = new Hashtable();
+        public void AddCommandBarItem(string title, Bitmap icon, ActionCommandBarItem action)
+        {
+            hashCommandBarItem.Add(title, new CommandBarItem(title, icon, action));
         }
     }
 }

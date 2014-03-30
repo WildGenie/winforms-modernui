@@ -89,6 +89,7 @@ namespace MetroFramework.Forms
         ScreenBase activeScreen = null;        
         ScreenBase loadingScreen = null;
         ScreenBase homeScreen = null;
+        Panel commandPanel = new Panel();
 
         Stack<ScreenBase> stackScreen = new Stack<ScreenBase>();
 
@@ -150,23 +151,24 @@ namespace MetroFramework.Forms
                 throw new Exception();
             }
 
+            if (activeScreen != null && activeScreen.IsHavingCommandScreen)
+            {
+                HideCommandBar();
+            }
+
             if (isAdvancing) //not adding homescreen as bottomest screen
             {
                 topNavigationButton.Visible = false;
-                //topNavigationButton.Text = ""; //left arrow
                 topNavigationButton.Image = MetroFramework.Properties.Resources.back;
                 AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 100, 90);
 
                 stackScreen.Push(activeScreen); 
                 AnimationUtil.Animate(activeScreen, AnimationUtil.Effect.Slide, 100, 180);
-                
-                
             }
             else
             {   
                 AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 50, 90);
                 topNavigationButton.Visible = false;
-                //topNavigationButton.Text = "";// ""; //home
                 if (activeScreen != null && activeScreen.ScreenType!=ScreenTypeEnum.LoadingScreen)
                     AnimationUtil.Animate(activeScreen, AnimationUtil.Effect.Slide, 100, 180);
                 
@@ -190,9 +192,15 @@ namespace MetroFramework.Forms
             this.mainPanel.Controls.Add(screen);
             AnimationUtil.Animate(screen, AnimationUtil.Effect.Slide, 500, 270);
             screen.ActivateScreen();
+
             
             
             activeScreen = screen;
+        }
+
+        private void HideCommandBar()
+        {
+            commandPanel.Visible = false;
         }
 
         private bool displayHeaderBackground = true;
@@ -454,6 +462,13 @@ namespace MetroFramework.Forms
             #region Swdev
             mainPanel.Dock = DockStyle.Fill;
             Controls.Add(mainPanel);
+
+            commandPanel.Dock = DockStyle.Bottom;
+            commandPanel.Visible = false;
+            commandPanel.Height = 80;
+            commandPanel.BackColor = MetroColors.Orange;
+            Controls.Add(commandPanel);
+
 
             topNavigationButton = new Button();
             topNavigationButton.Visible = false;
@@ -1847,5 +1862,35 @@ namespace MetroFramework.Forms
         }
 
         #endregion
+
+
+        internal void DisplayCommandBar(Hashtable hashCommandBarItem)
+        {
+            int i=0;
+            commandPanel.Controls.Clear();
+            foreach(DictionaryEntry dict in hashCommandBarItem)
+            {
+                CommandBarItem item = (CommandBarItem) dict.Value;
+                Button btn = new Button();
+                btn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.FlatAppearance.BorderSize = 0;
+                btn.FlatAppearance.BorderColor = MetroColors.Orange;
+                btn.Image = item.icon;
+                btn.AutoSize = true;
+                btn.ForeColor = MetroColors.White;
+                btn.TextImageRelation = TextImageRelation.ImageAboveText;
+                btn.Text = item.title;
+
+                btn.Location = new Point((i * btn.Size.Width), 10);
+                if (item.action != null)
+                {
+                    btn.Click += new System.EventHandler(item.action);
+                }
+                commandPanel.Controls.Add(btn);
+                ++i;
+            }
+            AnimationUtil.Animate(commandPanel, AnimationUtil.Effect.Slide, 100, 270);            
+        }
     }
 }

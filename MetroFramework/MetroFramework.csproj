@@ -216,6 +216,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SwdevIUI\CommandBarItem.cs" />
     <Compile Include="SwdevIUI\ScreenBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
