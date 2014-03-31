@@ -191,10 +191,8 @@ namespace MetroFramework.Forms
             screen.Visible = false;
             this.mainPanel.Controls.Add(screen);
             AnimationUtil.Animate(screen, AnimationUtil.Effect.Slide, 500, 270);
+            screen.Refresh();
             screen.ActivateScreen();
-
-            
-            
             activeScreen = screen;
         }
 
