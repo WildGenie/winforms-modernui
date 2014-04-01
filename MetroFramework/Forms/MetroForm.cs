@@ -163,14 +163,18 @@ namespace MetroFramework.Forms
                 AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 100, 90);
 
                 stackScreen.Push(activeScreen); 
-                AnimationUtil.Animate(activeScreen, AnimationUtil.Effect.Slide, 100, 180);
+                //AnimationUtil.Animate(activeScreen, AnimationUtil.Effect.Slide, 100, 180);
+                activeScreen.Visible = false;
             }
             else
             {   
                 AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 50, 90);
                 topNavigationButton.Visible = false;
-                if (activeScreen != null && activeScreen.ScreenType!=ScreenTypeEnum.LoadingScreen)
-                    AnimationUtil.Animate(activeScreen, AnimationUtil.Effect.Slide, 100, 180);
+                if (activeScreen != null && activeScreen.ScreenType != ScreenTypeEnum.LoadingScreen)
+                {
+                    //AnimationUtil.Animate(activeScreen, AnimationUtil.Effect.Slide, 100, 180);
+                    activeScreen.Visible = false;
+                }
                 
             }
 
@@ -183,14 +187,15 @@ namespace MetroFramework.Forms
             {
                 lblScreenName.Text = "  ";
             }
-            AnimationUtil.Animate(lblScreenName, AnimationUtil.Effect.Slide, 100, 90);
+            AnimationUtil.Animate(lblScreenName, AnimationUtil.Effect.Slide, 100, 180);
 
             
 
             screen.Dock = DockStyle.Fill;
             screen.Visible = false;
             this.mainPanel.Controls.Add(screen);
-            AnimationUtil.Animate(screen, AnimationUtil.Effect.Slide, 500, 270);
+            //AnimationUtil.Animate(screen, AnimationUtil.Effect.Slide, 500, 270);
+            screen.Visible = true;
             screen.Refresh();
             screen.ActivateScreen();
             activeScreen = screen;
