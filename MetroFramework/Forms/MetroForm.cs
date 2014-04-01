@@ -82,7 +82,7 @@ namespace MetroFramework.Forms
 
         #region Swdev
         Panel mainPanel = new Panel();
-        Button topNavigationButton;
+        PictureBox topNavigationButton;
         Label lblScreenName;
         MetroTextBox txtLiveSearch;
         Hashtable hashScreen = new Hashtable();
@@ -473,21 +473,24 @@ namespace MetroFramework.Forms
             Controls.Add(commandPanel);
 
 
-            topNavigationButton = new Button();
+            topNavigationButton = new PictureBox();
             topNavigationButton.Visible = false;
             topNavigationButton.Font = new System.Drawing.Font("Segoe UI Symbol", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             topNavigationButton.ForeColor = MetroColors.Silver;
             topNavigationButton.BackColor = MetroColors.White;//MetroPaint.GetStyleColor(this.Style); //brown
             topNavigationButton.Text = "";//""; //HOME
-            topNavigationButton.FlatStyle = FlatStyle.Flat;
-            topNavigationButton.FlatAppearance.BorderSize = 0;
-            topNavigationButton.FlatAppearance.MouseOverBackColor = topNavigationButton.BackColor;
-            topNavigationButton.FlatAppearance.MouseDownBackColor = topNavigationButton.BackColor;
+            //topNavigationButton.FlatStyle = FlatStyle.Flat;
+            //topNavigationButton.FlatAppearance.BorderSize = 0;
+            //topNavigationButton.FlatAppearance.MouseOverBackColor = topNavigationButton.BackColor;
+            //topNavigationButton.FlatAppearance.MouseDownBackColor = topNavigationButton.BackColor;
             topNavigationButton.MouseHover += topNavigationButton_MouseHover;
             topNavigationButton.MouseLeave += topNavigationButton_MouseLeave;
+            topNavigationButton.Cursor = Cursors.Hand;
             topNavigationButton.AutoSize = true;
+            topNavigationButton.Width = MetroFramework.Properties.Resources.back.Width;
+            topNavigationButton.Height = MetroFramework.Properties.Resources.back.Height;
             topNavigationButton.Click += topNavigationButton_Click;
-            topNavigationButton.Location = new Point(backImagePadding.Left + 180, 5);//new Point(Padding., Padding.Left);
+            topNavigationButton.Location = new Point(BackImagePadding.Left + 200, 25);//new Point(Padding., Padding.Left); //BackImagePadding.Top 0???
             Controls.Add(topNavigationButton);
             
 
@@ -499,7 +502,7 @@ namespace MetroFramework.Forms
             this.lblScreenName.Name = "lblScreenName";
             this.lblScreenName.Size = new System.Drawing.Size(122, 37);
             this.lblScreenName.TabIndex = 2;
-            this.lblScreenName.Location = new Point(topNavigationButton.Left + topNavigationButton.Width - 1, topNavigationButton.Top+10);
+            this.lblScreenName.Location = new Point(topNavigationButton.Left + topNavigationButton.Width - 1, topNavigationButton.Top+6);
             this.lblScreenName.Text = "Metro UI";
             Controls.Add(lblScreenName);
             #endregion
@@ -656,12 +659,13 @@ namespace MetroFramework.Forms
                 Rectangle bounds = new Rectangle(0,0,0,0);
 
                 #region swdev
+                int baseTopLogo = 30;//25
                 if (headerAlignment == MetroFormTextAlign.Right)
                 {
-                    bounds = new Rectangle(ClientRectangle.Right - (backImagePadding.Right), 25, ClientRectangle.Width - 2 * 20, 40);
+                    bounds = new Rectangle(ClientRectangle.Right - (backImagePadding.Right), baseTopLogo + 10, ClientRectangle.Width - 2 * 20, 40);
                 }else if (headerAlignment == MetroFormTextAlign.Left)
                 {
-                    bounds = new Rectangle(backImagePadding.Left + backImage.Size.Width + 10, 25, ClientRectangle.Width - 2 * 20, 40);
+                    bounds = new Rectangle(backImagePadding.Left + backImage.Size.Width + 10, baseTopLogo + 10, ClientRectangle.Width - 2 * 20, 40);
                 }
                 #endregion
                 TextFormatFlags flags = TextFormatFlags.EndEllipsis | GetTextFormatFlags();
@@ -670,10 +674,10 @@ namespace MetroFramework.Forms
                 #region swdev
                 if (headerAlignment == MetroFormTextAlign.Right)
                 {
-                    bounds = new Rectangle(ClientRectangle.Right - (backImagePadding.Right) + 3, 10, ClientRectangle.Width - 2 * 20, 40);//20 //80
+                    bounds = new Rectangle(ClientRectangle.Right - (backImagePadding.Right) + 3, baseTopLogo, ClientRectangle.Width - 2 * 20, 40);//20 //80
                 }else if (headerAlignment == MetroFormTextAlign.Left)
                 {
-                    bounds = new Rectangle(backImagePadding.Left + backImage.Size.Width + 10 , 10, ClientRectangle.Width - 2 * 20, 40);//20 //80
+                    bounds = new Rectangle(backImagePadding.Left + backImage.Size.Width + 10 , baseTopLogo, ClientRectangle.Width - 2 * 20, 40);//20 //80
                 }
                 flags = TextFormatFlags.EndEllipsis | GetTextFormatFlags();
                 TextRenderer.DrawText(e.Graphics, "Cattlesoft, Inc", MetroFonts.Company, bounds, MetroPaint.ForeColor.Title(Theme), flags);
