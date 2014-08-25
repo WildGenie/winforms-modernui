@@ -234,9 +234,9 @@ namespace MetroFramework.Drawing
             public static Color Form(MetroThemeStyle theme)
             {
                 if (theme == MetroThemeStyle.Dark)
-                    return Color.FromArgb(17, 17, 17);
+                    return Color.FromArgb(45, 45, 48);
 
-                return Color.FromArgb(255, 255, 255);
+                return Color.FromArgb(231, 232, 232);
             }
 
             public sealed class Button
@@ -455,6 +455,41 @@ namespace MetroFramework.Drawing
 
                         return Color.FromArgb(221, 221, 221);
                     }
+                }
+            }
+
+            public sealed class MenuStrip
+            {
+                public static Color Normal(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(34, 34, 34);
+
+                    return Color.FromArgb(238, 238, 238);
+                }
+
+                public static Color Hover(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(62, 62, 64);
+
+                    return Color.FromArgb(248, 249, 250);
+                }
+
+                public static Color Press(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(27, 27, 28);
+
+                    return Color.FromArgb(231, 232, 236);
+                }
+
+                public static Color Disabled(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(80, 80, 80);
+
+                    return Color.FromArgb(204, 204, 204);
                 }
             }
         }
@@ -698,6 +733,60 @@ namespace MetroFramework.Drawing
                         return Color.FromArgb(51, 51, 51);
 
                     return Color.FromArgb(209, 209, 209);
+                }
+            }
+
+            public sealed class TreeView
+            {
+                public static Color Normal(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(255, 255, 255);
+
+                    return Color.FromArgb(0, 0, 0);
+                }
+
+                public static Color Hover(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(0, 91, 255);
+
+                    return Color.FromArgb(0, 91, 255);
+                }
+            }
+
+            public sealed class MenuStrip
+            {
+                public static Color Normal(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(255, 255, 255);
+
+                    return Color.FromArgb(0, 0, 0);
+                }
+
+                public static Color Hover(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(255, 255, 255);
+
+                    return Color.FromArgb(0, 0, 0);
+                }
+
+                public static Color Press(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(238, 238, 238);
+
+                    return Color.FromArgb(51, 51, 51);
+                }
+
+                public static Color Disabled(MetroThemeStyle theme)
+                {
+                    if (theme == MetroThemeStyle.Dark)
+                        return Color.FromArgb(80, 80, 80);
+
+                    return Color.FromArgb(204, 204, 204);
                 }
             }
         }

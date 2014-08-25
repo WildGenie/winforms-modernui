@@ -11,7 +11,8 @@ namespace MetroFramework.Demo
     {
         public MainForm()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            
         }
 
         private void metroTileSwitch_Click(object sender, EventArgs e)
@@ -79,6 +80,13 @@ namespace MetroFramework.Demo
         private void metroButton4_Click(object sender, EventArgs e)
         {
             metroTextBox2.Focus();
+        }
+
+        private void metroButton4_Click_1(object sender, EventArgs e)
+        {
+            Image img = global::MetroFramework.Demo.Properties.Resources.GitHub_Mark;
+            Graphics g = this.CreateGraphics();
+            g.DrawImage(img, 100, 20, 50, 50); 
         }
     }
 }

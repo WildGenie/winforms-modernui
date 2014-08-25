@@ -1924,7 +1924,7 @@ namespace MetroFramework.Drawing.Html
         #region Properties
 
         /// <summary>
-        /// Gets the ï box
+        /// Gets the ÅEbox
         /// </summary>
         public CssBox ListItemBox
         {
@@ -2350,7 +2350,7 @@ namespace MetroFramework.Drawing.Html
                     }
                     else
                     {
-                        _listItemBox.Text = "ï";
+                        _listItemBox.Text = "ÅE";
                     }
                     
                     _listItemBox.MeasureBounds(g);
@@ -2931,7 +2931,7 @@ namespace MetroFramework.Drawing.Html
             {
                 b.OffsetTop(amount);
             }
-            //TODO: AquÌ me quede: no se mueve bien todo (probar con las tablas rojas)
+            //TODO: AquÅEme quede: no se mueve bien todo (probar con las tablas rojas)
             Location = new PointF(Location.X, Location.Y + amount);
         }
 

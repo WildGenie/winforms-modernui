@@ -39,6 +39,7 @@ Controls supported
 * Custom User Control
 * ContextMenu
 * MessageBox
+* MenuStrip
 
 Components supported
 ------------------

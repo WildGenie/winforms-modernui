@@ -102,6 +102,9 @@
     <Compile Include="Controls\MetroLink.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\MetroMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -133,6 +136,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MetroTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroUserControl.cs">

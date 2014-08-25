@@ -574,9 +574,9 @@ namespace MetroFramework.Forms
                     G = (byte)(255 - pixelColor.G);
                     B = (byte)(255 - pixelColor.B);
 
-                    if (R <= 0) R= 17;
-                    if (G <= 0) G= 17;
-                    if (B <= 0) B= 17;
+                    if (R <= 25) R= 45;
+                    if (G <= 25) G= 45;
+                    if (B <= 25) B= 48;
                     //bitmapImage.SetPixel(x, y, Color.FromArgb((int)A, (int)R, (int)G, (int)B));
                     bitmapImage.SetPixel(x, y, Color.FromArgb((int)R, (int)G, (int)B));
                 }
