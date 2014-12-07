@@ -174,9 +174,9 @@ namespace MetroFramework.Controls
 
         private void settheme()
         {
-            this.BackColor = MetroPaint.BackColor.Form(Theme);
-            this.ForeColor = MetroPaint.ForeColor.Button.Normal(Theme);
-            this.Renderer = new MetroCTXRenderer(Theme, Style);
+            BackColor = MetroPaint.BackColor.Form(Theme);
+            ForeColor = MetroPaint.ForeColor.Button.Normal(Theme);
+            Renderer = new MetroCTXRenderer(Theme, Style);
         }
 
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
@@ -184,7 +184,7 @@ namespace MetroFramework.Controls
             private MetroThemeStyle theme;
             private MetroColorStyle style;
 
-            public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style)
+            public MetroCTXRenderer(MetroThemeStyle Theme, MetroColorStyle Style)
                 : base(new contextcolors(Theme, Style))
             {
                 theme = Theme;
@@ -209,7 +209,7 @@ namespace MetroFramework.Controls
                         Brush brush = new SolidBrush(MetroPaint.BackColor.MenuStrip.Press(theme));
                         e.Graphics.FillRectangle(brush, bounds);
 
-                        using(Pen p = new Pen(MetroMenuStrip.NormalBorder(theme))) 
+                        using(Pen p = new Pen(NormalBorder(theme))) 
                         {
                             PointF leftBottomCorner = new PointF(bounds.X, bounds.Y + bounds.Height);
                             PointF leftTopCorner = new PointF(bounds.X, bounds.Y);
@@ -271,7 +271,7 @@ namespace MetroFramework.Controls
             MetroThemeStyle _theme = MetroThemeStyle.Light;
             MetroColorStyle _style = MetroColorStyle.Blue;
 
-            public contextcolors(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style)
+            public contextcolors(MetroThemeStyle Theme, MetroColorStyle Style)
             {
                 _theme = Theme;
                 _style = Style;
@@ -279,12 +279,12 @@ namespace MetroFramework.Controls
 
             public override Color SeparatorLight
             {
-                get { return MetroMenuStrip.NormalBorder(_theme); }
+                get { return NormalBorder(_theme); }
             }
 
             public override Color SeparatorDark
             {
-                get { return MetroMenuStrip.NormalBorder(_theme); }
+                get { return NormalBorder(_theme); }
             }
 
             public override Color MenuItemSelected
@@ -309,7 +309,7 @@ namespace MetroFramework.Controls
 
             public override Color MenuBorder
             {
-                get { return MetroMenuStrip.NormalBorder(_theme); }
+                get { return NormalBorder(_theme); }
             }
 
             public override Color MenuItemBorder

@@ -114,7 +114,7 @@ namespace MetroFramework.Forms
             if(e.Screen.ScreenType==ScreenTypeEnum.LoadingScreen)
             {
                 e.Screen.Dismiss();
-                this.mainPanel.Controls.Remove(e.Screen);
+                mainPanel.Controls.Remove(e.Screen);
                 DisplayScreen(homeScreen,false);
 
                 stackScreen.Clear();
@@ -159,7 +159,7 @@ namespace MetroFramework.Forms
             if (isAdvancing) //not adding homescreen as bottomest screen
             {
                 topNavigationButton.Visible = false;
-                topNavigationButton.Image = MetroFramework.Properties.Resources.back;
+                topNavigationButton.Image = Properties.Resources.back;
                 AnimationUtil.Animate(topNavigationButton, AnimationUtil.Effect.Slide, 100, 90);
 
                 stackScreen.Push(activeScreen); 
@@ -193,7 +193,7 @@ namespace MetroFramework.Forms
 
             screen.Dock = DockStyle.Fill;
             screen.Visible = false;
-            this.mainPanel.Controls.Add(screen);
+            mainPanel.Controls.Add(screen);
             //AnimationUtil.Animate(screen, AnimationUtil.Effect.Slide, 500, 270);
             screen.Visible = true;
             screen.Refresh();
@@ -212,7 +212,7 @@ namespace MetroFramework.Forms
         public bool DisplayHeaderBackground
         {
             get { return displayHeaderBackground; }
-            set { displayHeaderBackground = value; this.Refresh(); }
+            set { displayHeaderBackground = value; Refresh(); }
         }
 
         #endregion
@@ -475,7 +475,7 @@ namespace MetroFramework.Forms
 
             topNavigationButton = new PictureBox();
             topNavigationButton.Visible = false;
-            topNavigationButton.Font = new System.Drawing.Font("Segoe UI Symbol", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            topNavigationButton.Font = new Font("Segoe UI Symbol", 26.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             topNavigationButton.ForeColor = MetroColors.Silver;
             topNavigationButton.BackColor = MetroColors.White;//MetroPaint.GetStyleColor(this.Style); //brown
             topNavigationButton.Text = "";//""; //HOME
@@ -487,23 +487,23 @@ namespace MetroFramework.Forms
             topNavigationButton.MouseLeave += topNavigationButton_MouseLeave;
             topNavigationButton.Cursor = Cursors.Hand;
             topNavigationButton.AutoSize = true;
-            topNavigationButton.Width = MetroFramework.Properties.Resources.back.Width;
-            topNavigationButton.Height = MetroFramework.Properties.Resources.back.Height;
+            topNavigationButton.Width = Properties.Resources.back.Width;
+            topNavigationButton.Height = Properties.Resources.back.Height;
             topNavigationButton.Click += topNavigationButton_Click;
             topNavigationButton.Location = new Point(BackImagePadding.Left + 200, 25);//new Point(Padding., Padding.Left); //BackImagePadding.Top 0???
             Controls.Add(topNavigationButton);
             
 
             lblScreenName = new Label();
-            this.lblScreenName.AutoSize = true;
-            this.lblScreenName.BackColor = MetroColors.White; //System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(81)))), ((int)(((byte)(0)))));
-            this.lblScreenName.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScreenName.ForeColor = MetroColors.Black; //System.Drawing.Color.White;
-            this.lblScreenName.Name = "lblScreenName";
-            this.lblScreenName.Size = new System.Drawing.Size(122, 37);
-            this.lblScreenName.TabIndex = 2;
-            this.lblScreenName.Location = new Point(topNavigationButton.Left + topNavigationButton.Width - 1, topNavigationButton.Top+6);
-            this.lblScreenName.Text = "Metro UI";
+            lblScreenName.AutoSize = true;
+            lblScreenName.BackColor = MetroColors.White; //System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(81)))), ((int)(((byte)(0)))));
+            lblScreenName.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            lblScreenName.ForeColor = MetroColors.Black; //System.Drawing.Color.White;
+            lblScreenName.Name = "lblScreenName";
+            lblScreenName.Size = new Size(122, 37);
+            lblScreenName.TabIndex = 2;
+            lblScreenName.Location = new Point(topNavigationButton.Left + topNavigationButton.Width - 1, topNavigationButton.Top+6);
+            lblScreenName.Text = "Metro UI";
             Controls.Add(lblScreenName);
             #endregion
         }
@@ -1073,21 +1073,21 @@ namespace MetroFramework.Forms
             Refresh();
 
             #region swdev
-                this.txtLiveSearch = new MetroTextBox();
-                this.txtLiveSearch.Size = new System.Drawing.Size(146, 20);
+                txtLiveSearch = new MetroTextBox();
+                txtLiveSearch.Size = new Size(146, 20);
                 MetroFormButton btnMinimize;
                 windowButtonList.TryGetValue(WindowButtons.Minimize, out btnMinimize);
                 if (btnMinimize != null)
                 {
-                    this.txtLiveSearch.Location = new System.Drawing.Point(btnMinimize.Left - txtLiveSearch.Width - 5, 12);
-                    this.txtLiveSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-                    this.txtLiveSearch.Name = "txtLiveSearch";
-                    this.txtLiveSearch.TabIndex = 38;
-                    this.txtLiveSearch.Text = "Search";
-                    this.txtLiveSearch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    this.txtLiveSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-                    this.txtLiveSearch.Leave += txtLiveSearch_Leave;
-                    this.txtLiveSearch.Enter += txtLiveSearch_Enter;
+                    txtLiveSearch.Location = new Point(btnMinimize.Left - txtLiveSearch.Width - 5, 12);
+                    txtLiveSearch.Anchor = ((AnchorStyles)((AnchorStyles.Top | AnchorStyles.Right)));
+                    txtLiveSearch.Name = "txtLiveSearch";
+                    txtLiveSearch.TabIndex = 38;
+                    txtLiveSearch.Text = "Search";
+                    txtLiveSearch.Font = new Font("Segoe UI", 8.25F, FontStyle.Italic, GraphicsUnit.Point, ((byte)(0)));
+                    txtLiveSearch.TextAlign = HorizontalAlignment.Right;
+                    txtLiveSearch.Leave += txtLiveSearch_Leave;
+                    txtLiveSearch.Enter += txtLiveSearch_Enter;
                     Controls.Add(txtLiveSearch);
                 }
             #endregion
@@ -1879,7 +1879,7 @@ namespace MetroFramework.Forms
             {
                 CommandBarItem item = (CommandBarItem) dict.Value;
                 Button btn = new Button();
-                btn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                btn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
                 btn.FlatStyle = FlatStyle.Flat;
                 btn.FlatAppearance.BorderSize = 0;
                 btn.FlatAppearance.BorderColor = MetroColors.Orange;
@@ -1892,7 +1892,7 @@ namespace MetroFramework.Forms
                 btn.Location = new Point((i * btn.Size.Width), 10);
                 if (item.action != null)
                 {
-                    btn.Click += new System.EventHandler(item.action);
+                    btn.Click += new EventHandler(item.action);
                 }
                 commandPanel.Controls.Add(btn);
                 ++i;

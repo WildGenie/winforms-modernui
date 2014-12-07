@@ -153,7 +153,7 @@ namespace MetroFramework.Drawing.Html
                     return;
             }
 
-            if (!float.TryParse(number,  System.Globalization.NumberStyles.Number, NumberFormatInfo.InvariantInfo, out _number))
+            if (!float.TryParse(number,  NumberStyles.Number, NumberFormatInfo.InvariantInfo, out _number))
             {
                 _hasError = true;
             }

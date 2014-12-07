@@ -82,14 +82,14 @@ namespace MetroFramework.Animation
         }
         protected void Start(Control control, TransitionType transitionType, int duration, AnimationAction actionHandler, AnimationFinishedEvaluator evaluatorHandler)
         {
-            this.targetControl = control;
+            targetControl = control;
             this.transitionType = transitionType;
             this.actionHandler = actionHandler;
             this.evaluatorHandler = evaluatorHandler;
 
-            this.counter = 0;
-            this.startTime = 0;
-            this.targetTime = duration;
+            counter = 0;
+            startTime = 0;
+            targetTime = duration;
 
             timer = DelayedCall.Start(DoAnimation, duration);
         }

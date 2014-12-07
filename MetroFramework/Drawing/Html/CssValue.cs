@@ -175,15 +175,15 @@ namespace MetroFramework.Drawing.Html
 
                 if (hex.Length == 6)
                 {
-                    r = int.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
-                    g = int.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
-                    b = int.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+                    r = int.Parse(hex.Substring(0, 2), NumberStyles.HexNumber);
+                    g = int.Parse(hex.Substring(2, 2), NumberStyles.HexNumber);
+                    b = int.Parse(hex.Substring(4, 2), NumberStyles.HexNumber);
                 }
                 else if (hex.Length == 3)
                 {
-                    r = int.Parse(new String(hex.Substring(0, 1)[0], 2), System.Globalization.NumberStyles.HexNumber);
-                    g = int.Parse(new String(hex.Substring(1, 1)[0], 2), System.Globalization.NumberStyles.HexNumber);
-                    b = int.Parse(new String(hex.Substring(2, 1)[0], 2), System.Globalization.NumberStyles.HexNumber);
+                    r = int.Parse(new String(hex.Substring(0, 1)[0], 2), NumberStyles.HexNumber);
+                    g = int.Parse(new String(hex.Substring(1, 1)[0], 2), NumberStyles.HexNumber);
+                    b = int.Parse(new String(hex.Substring(2, 1)[0], 2), NumberStyles.HexNumber);
                 }
                 else
                 {

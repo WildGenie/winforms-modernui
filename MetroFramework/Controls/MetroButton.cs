@@ -252,7 +252,7 @@ namespace MetroFramework.Controls
                     }
                     else
                     {
-                        backColor = this.BackColor;
+                        backColor = BackColor;
                     }
                 }
 

@@ -165,8 +165,8 @@ namespace MetroFramework.Controls
 
         private void settheme()
         {
-            this.BackColor = MetroPaint.BackColor.Form(Theme);
-            this.ForeColor = MetroPaint.ForeColor.Button.Normal(Theme);
+            BackColor = MetroPaint.BackColor.Form(Theme);
+            ForeColor = MetroPaint.ForeColor.Button.Normal(Theme);
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -221,12 +221,12 @@ namespace MetroFramework.Controls
             {
                 if (node.IsSelected)
                 {
-                    RectangleF selectedRect = new RectangleF(0, node.Bounds.Y, this.Width, node.Bounds.Height);
+                    RectangleF selectedRect = new RectangleF(0, node.Bounds.Y, Width, node.Bounds.Height);
                     g.FillRectangle(Brushes.DeepSkyBlue, selectedRect);
                 }
                 else
                 {
-                    RectangleF selectedRect = new RectangleF(0, node.Bounds.Y, this.Width, node.Bounds.Height);
+                    RectangleF selectedRect = new RectangleF(0, node.Bounds.Y, Width, node.Bounds.Height);
                     g.FillRectangle(new SolidBrush(BackColor), selectedRect);
                 }
 
@@ -242,7 +242,7 @@ namespace MetroFramework.Controls
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-            float side = this.ItemHeight / 2.5f;
+            float side = ItemHeight / 2.5f;
             float h = (float)Math.Sqrt(3) / 2f * side;
 
             foreach (TreeNode node in nodes)

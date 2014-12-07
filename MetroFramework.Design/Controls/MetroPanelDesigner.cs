@@ -36,7 +36,7 @@ namespace MetroFramework.Design.Controls
         {
             base.Initialize(component);
 
-            if (this.Control is MetroPanel)
+            if (Control is MetroPanel)
             {
                 //this.EnableDesignMode(((MetroPanel)this.Control).ScrollablePanel, "ScrollablePanel");
             }

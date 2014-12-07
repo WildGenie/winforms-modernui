@@ -33,25 +33,25 @@ namespace MetroFramework.Native
     [SuppressUnmanagedCodeSecurity]
     internal class SubClass : NativeWindow
     {
-        public delegate int SubClassWndProcEventHandler(ref System.Windows.Forms.Message m);
+        public delegate int SubClassWndProcEventHandler(ref Message m);
         public event SubClassWndProcEventHandler SubClassedWndProc;
         private bool IsSubClassed = false;
 
         public SubClass(IntPtr Handle, bool _SubClass)
         {
-            base.AssignHandle(Handle);
-            this.IsSubClassed = _SubClass;
+            AssignHandle(Handle);
+            IsSubClassed = _SubClass;
         }
 
         public bool SubClassed
         {
-            get { return this.IsSubClassed; }
-            set { this.IsSubClassed = value; }
+            get { return IsSubClassed; }
+            set { IsSubClassed = value; }
         }
 
         protected override void WndProc(ref Message m)
         {
-            if (this.IsSubClassed)
+            if (IsSubClassed)
             {
                 if (OnSubClassedWndProc(ref m) != 0)
                     return;
@@ -104,7 +104,7 @@ namespace MetroFramework.Native
         {
             if (SubClassedWndProc != null)
             {
-                return this.SubClassedWndProc(ref m);
+                return SubClassedWndProc(ref m);
             }
 
             return 0;

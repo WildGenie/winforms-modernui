@@ -290,6 +290,13 @@ namespace MetroFramework.Controls
             set { baseTextBox.Multiline = value; }
         }
 
+         [DefaultValue(true)]
+        public bool WordWrap
+        {
+            get { return baseTextBox.WordWrap; }
+            set { baseTextBox.WordWrap = value; }
+        }
+
         public override string Text
         {
             get { return baseTextBox.Text; }
@@ -364,7 +371,7 @@ namespace MetroFramework.Controls
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer, true);
 
             base.TabStop = false;
-            base.GotFocus += MetroTextBox_GotFocus;
+            GotFocus += MetroTextBox_GotFocus;
             CreateBaseTextBox();
             UpdateBaseTextBox();
             AddEventHandler();       
@@ -388,62 +395,62 @@ namespace MetroFramework.Controls
         
         private void BaseTextBoxSizeChanged(object sender, EventArgs e)
         {
-            base.OnSizeChanged(e);
+            OnSizeChanged(e);
         }
 
         private void BaseTextBoxCursorChanged(object sender, EventArgs e)
         {
-            base.OnCursorChanged(e);
+            OnCursorChanged(e);
         }
 
         private void BaseTextBoxContextMenuStripChanged(object sender, EventArgs e)
         {
-            base.OnContextMenuStripChanged(e);
+            OnContextMenuStripChanged(e);
         }
 
         private void BaseTextBoxContextMenuChanged(object sender, EventArgs e)
         {
-            base.OnContextMenuChanged(e);
+            OnContextMenuChanged(e);
         }
 
         private void BaseTextBoxClientSizeChanged(object sender, EventArgs e)
         {
-            base.OnClientSizeChanged(e);
+            OnClientSizeChanged(e);
         }
 
         private void BaseTextBoxClick(object sender, EventArgs e)
         {
-            base.OnClick(e);
+            OnClick(e);
         }
 
         private void BaseTextBoxChangeUiCues(object sender, UICuesEventArgs e)
         {
-            base.OnChangeUICues(e);
+            OnChangeUICues(e);
         }
 
         private void BaseTextBoxCausesValidationChanged(object sender, EventArgs e)
         {
-            base.OnCausesValidationChanged(e);
+            OnCausesValidationChanged(e);
         }
 
         private void BaseTextBoxKeyUp(object sender, KeyEventArgs e)
         {
-            base.OnKeyUp(e);
+            OnKeyUp(e);
         }
 
         private void BaseTextBoxKeyPress(object sender, KeyPressEventArgs e)
         {
-            base.OnKeyPress(e);
+            OnKeyPress(e);
         }
 
         private void BaseTextBoxKeyDown(object sender, KeyEventArgs e)
         {
-            base.OnKeyDown(e);
+            OnKeyDown(e);
         }
 
         private void BaseTextBoxTextChanged(object sender, EventArgs e)
         {
-            base.OnTextChanged(e);
+            OnTextChanged(e);
         }
 
         public void Select(int start, int length)

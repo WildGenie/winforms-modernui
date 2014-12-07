@@ -62,7 +62,7 @@ namespace MetroFramework.Drawing.Html
 
         void HtmlToolTip_Popup(object sender, PopupEventArgs e)
         {
-            string text = this.GetToolTip(e.AssociatedControl);
+            string text = GetToolTip(e.AssociatedControl);
             string font = string.Format(NumberFormatInfo.InvariantInfo, "font: {0}pt {1}", e.AssociatedControl.Font.Size, e.AssociatedControl.Font.FontFamily.Name);
             
             //Create fragment container

@@ -180,7 +180,7 @@ namespace MetroFramework.Design.Controls
         {
             if (SelectionService.PrimarySelection == Control)
             {
-                var hti = new MetroFramework.Native.WinApi.TCHITTESTINFO
+                var hti = new WinApi.TCHITTESTINFO
                 {
                     pt = Control.PointToClient(point),
                     flags = 0

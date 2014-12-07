@@ -157,14 +157,14 @@ namespace MetroFramework.Controls
 
         private void settheme()
         {
-            this.BackColor = MetroPaint.BackColor.Form(Theme);
-            this.ForeColor = MetroPaint.ForeColor.Button.Normal(Theme);            
-            this.Renderer = new MetroCTXRenderer(Theme, Style);     
+            BackColor = MetroPaint.BackColor.Form(Theme);
+            ForeColor = MetroPaint.ForeColor.Button.Normal(Theme);            
+            Renderer = new MetroCTXRenderer(Theme, Style);     
         }
 
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
         {
-            public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
+            public MetroCTXRenderer(MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
         }
 
         private class contextcolors : ProfessionalColorTable
@@ -172,7 +172,7 @@ namespace MetroFramework.Controls
             MetroThemeStyle _theme = MetroThemeStyle.Light;
             MetroColorStyle _style = MetroColorStyle.Blue;
 
-            public contextcolors(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style)
+            public contextcolors(MetroThemeStyle Theme, MetroColorStyle Style)
             {
                 _theme = Theme;
                 _style = Style;

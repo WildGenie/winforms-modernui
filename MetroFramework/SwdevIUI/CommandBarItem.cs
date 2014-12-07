@@ -15,9 +15,9 @@ namespace MetroFramework.SwdevIUI
 
         public CommandBarItem(string _title, Bitmap _icon, ActionCommandBarItem _action)
         {
-            this.title = _title;
-            this.icon = _icon;
-            this.action = _action;
+            title = _title;
+            icon = _icon;
+            action = _action;
         }
     }
 
